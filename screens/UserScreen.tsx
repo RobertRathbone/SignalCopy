@@ -1,15 +1,29 @@
-import * as React from 'react';
+import React, {useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Pressable,  FlatList } from 'react-native';
+import { DataStore } from 'aws-amplify';
 import UserItem from '../components/UserItem'
+import { User } from '../src/models';
 
-import Users from '../assets/dummy-data/Users'
 
+export default function UserScreen() {
+  const [users, setUsers] = useState<User[]>([]);
 
-export default function TabOneScreen() {
+  useEffect(() => {
+    DataStore.query(User).then(setUsers);
+  })
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const fetchedUsers = await DataStore.query(User);
+  //     setUsers(fetchedUsers);
+  //   };
+  //   fetchUsers();
+  // }, [])
+
   return (
     <View style={styles.page}>
       <FlatList
-        data={Users}
+        data={users}
         renderItem={({item}) => <UserItem user={item}/>}
       />
     </View>
