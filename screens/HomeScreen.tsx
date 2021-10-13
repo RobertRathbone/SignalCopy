@@ -5,11 +5,13 @@ import { Auth } from 'aws-amplify';
 
 import chatRoomsData from '../assets/dummy-data/ChatRooms'
 
+
 const logOut = () => {
   Auth.signOut();
 }
 
 export default function TabOneScreen() {
+  
   return (
     <View style={styles.page}>
       <FlatList
