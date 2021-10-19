@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import React from "react";
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { useNavigation } from "@react-navigation/core";
@@ -11,7 +10,9 @@ export default function UserItem({ user }) {
     const navigation = useNavigation();
   
     const onPress = async () => {
-      // Create a chat room
+
+        // if existing chatroom, direct to that. otherwise, create new.
+        // Create a chat room
         const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 0}))
 
         // connect Authenticated user with the ChatRoom
